@@ -30,7 +30,8 @@ RUN apt-get -q update &&\
 
 # Set user jenkins to the image
 RUN useradd -m -d /home/jenkins -s /bin/sh jenkins &&\
-    echo "jenkins:jenkins" | chpasswd
+    echo "jenkins:jenkins" | chpasswd &&\
+    echo "root:password" | chpasswd
 
 # Standard SSH port
 EXPOSE 22
