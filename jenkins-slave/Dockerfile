@@ -1,5 +1,5 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a Jenkins slave build node.
-FROM ubuntu
+FROM ubuntu:trusty
 
 # In case you need proxy
 #RUN echo 'Acquire::http::Proxy "http://127.0.0.1:8080";' >> /etc/apt/apt.conf
