@@ -1,0 +1,51 @@
+jenkins-master:
+mkdir jenkins
+docker run -d -p 8080:8080 -v $PWD/jenkins:/var/jenkins_home --name jenkins -t jenkins
+
+jenkins-slave:
+basic version:    docker pull evarga/jenkins-slave
+or git clone https://github.com/GodQ/docker.git
+docker build --force-rm=true -t jenkins-slave-gcc .
+note:  set root/jenkins password in Dockerfile(done)
+           slave will run in a docker container and it should invoke docker build and push to specified registry.
+           slave container must add "--privileged" so that it can call start docker and docker build/push
+
+Configuration:
+
+https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin
+
+- install Plugin in jenkins :Copy To Slave Plugin   Docker plugin  docker-build-step
+- start a docker registry container in one host
+
+          mkdir data
+          docker run -d -p 5000:5000 --restart=always --name registry -v `pwd`/data:/var/lib/registry registry:2
+          Add 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock --insecure-registry 192.168.4.253:5000"' in /etc/default/docker,  then service docker restart
+
+-  Setting in system configuration:
+
+          Add Cloud Docker in the end of system configuration,
+               Docker URL:   tcp://192.168.4.253:4243
+               Add Images:
+                         Image:  jenkins-slave-gcc
+                         Label:   docker-slave-gcc    (it will be used in project setting to match a slave)
+                         set Credentials : root/password
+
+- Setting in project configuration:
+
+               General:   select "Restrict where this project can be run" and input  "docker-slave-gcc"  in Label Expression
+               Build:
+                    a. Execute Shell:
+gcc test.c
+mkdir ./docker/data/
+cp a.out ./docker/data/
+service docker start
+#cd ./docker       #Dockerfile is in this folder
+#docker build --force-rm=true -t 192.168.4.253:5000/test .
+#docker push 192.168.4.253:5000/test
+#curl http://192.168.4.253:5000/v2/_catalog
+    b. Docker Build and Publish
+          Docker Host URL:  tcp://192.168.4.253:4243
+          Docker Registry URL:   http://192.168.4.253:5000
+          Tag:  $BUILD_NUMBER
+          Build Context:   docker
+               Action after Build: Stop and remove the docker Container
