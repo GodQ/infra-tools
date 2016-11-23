@@ -1,0 +1,37 @@
+Install in Docker Compose:
+  pip install docker-compose
+  docker-compose up -d
+  docker-compose ps
+
+docker-compose.yml:
+
+elasticsearch_master:
+  image: elasticsearch:2.4
+  command: "elasticsearch -Des.cluster.name=ElasticSearch-Quc -Des.node.master=true -Des.node.data=true"
+  volumes:
+  - "/opt/elasticsearch/data"
+  environment:
+  - ES_HEAP_SIZE=512m
+  ports:
+  - "9200:9200"
+  - "9300:9300"
+
+elasticsearch1:
+  image: elasticsearch:2.4
+  command: "elasticsearch -Des.cluster.name=ElasticSearch-Quc -Des.discovery.zen.ping.unicast.hosts=elasticsearch_master"
+  links:
+  - elasticsearch_master
+  volumes:
+  - "/opt/elasticsearch/data"
+  environment:
+  - ES_HEAP_SIZE=512m
+  
+elasticsearch2:
+  image: elasticsearch:2.4
+  command: "elasticsearch -Des.cluster.name=ElasticSearch-Quc -Des.discovery.zen.ping.unicast.hosts=elasticsearch_master"
+  links:
+  - elasticsearch_master
+  volumes:
+  - "/opt/elasticsearch/data"
+  environment:
+  - ES_HEAP_SIZE=512m
