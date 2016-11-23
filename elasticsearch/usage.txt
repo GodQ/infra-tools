@@ -1,0 +1,42 @@
+Concept:
+  Relational DB ⇒ Databases ⇒ Tables ⇒     Rows     ⇒ Columns
+  Elasticsearch ⇒     Indices   ⇒ Types ⇒ Documents ⇒ Fields
+
+Common API:
+  curl localhost:9200/_cluster/health?pretty
+  curl 'localhost:9200/_cat/health?v'
+  curl 'localhost:9200/_cat/indices?v'
+
+https://endymecy.gitbooks.io/elasticsearch-guide-chinese/content/getting-started/exploring-cluster.html
+
+Usage:
+  https://www.elastic.co/guide/en/elasticsearch/guide/current/_indexing_employee_documents.html
+  PUT /{index}/{type}/{id}
+
+PUT /corp/employee/1
+{
+"first_name" : "John",
+"last_name" : "Smith",
+"age" : 25,
+"about" : "I love to go rock climbing",
+"interests": [ "sports", "music" ]
+}
+
+GET /corp/employee/1
+GET /corp/employee/1?_source=age,about
+GET /megacorp/employee/_search
+GET /megacorp/employee/_search?q=last_name:Smith
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+}
+Mapping:
+  curl -X PUT 192.168.4.253:9200/dpccat -d @mappings.json
+
+Create Index:
+  PUT /blogs { "settings" : { "number_of_shards" : 3, "number_of_replicas" : 1 } }
+  PUT /blogs/_settings { "number_of_replicas" : 2 }
