@@ -2,12 +2,12 @@ registry:
   mkdir data
   docker run -d -p 5000:5000 --restart=always --name registry -v `pwd`/data:/var/lib/registry registry:2
 
-创建：
-  1.  获取官方registry:2或者daocloud.io/registry:2
-  2. 创建数据目录/docker_registry/registry
+Build:
+  1. Get registry:2
+  2. mkdir /docker_registry/registry
   3. docker run -d -p 33307:22 -p 5000:5000 -v /docker_registry/registry:/docker_registry/registry -e SQLALCHEMY_INDEX_DATABASE:sqlite:////docker_registry/registry/docker-registry.db -e STORAGE_PATH=/docker_registry/registry --name registry daocloud.io/registry
 
-Usage（client）:
+Usage (client side):
   add reg ip to /etc/hosts   "10.29.108.254  docker-registry"
   add DOCKER_OPTS="--insecure-registry docker-registry:5000" to /etc/default/docker
   docker tag dpcgw docker-registry:5000/dpcgw

@@ -1,0 +1,15 @@
+Build:
+  docker build --force-rm=true -t swift .
+
+Usage:
+  docker run -v /srv --name SWIFT_DATA busybox
+  docker run -d --restart=always -p 8080:8080 --volumes-from SWIFT_DATA -t -i swift
+
+Test:
+  apt-get install python-swiftclient
+  Native test: 
+    swift -A http://127.0.0.1:8080/auth/v1.0 -U test:tester -K testing stat
+    swift -A http://127.0.0.1:8080/auth/v1.0 -U test:tester -K testing post test
+    swift -A http://127.0.0.1:8080/auth/v1.0 -U test:tester -K testing list
+  S3 test:     
+    ./s3curl.pl --id "test:tester" --key "testing" -- -v http://127.0.0.1:8080

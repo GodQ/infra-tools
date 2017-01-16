@@ -1,0 +1,2 @@
+1. download code
+debootstrap --arch amd64 squeeze debian-squeeze http://mirrors.163.com/debian/
