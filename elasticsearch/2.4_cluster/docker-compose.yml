@@ -9,7 +9,7 @@ elasticsearch_master:
   - "9200:9200"
   - "9300:9300"
 
-elasticsearch1:
+elasticsearch-slave1:
   image: elasticsearch:2.4
   command: "elasticsearch -Des.cluster.name=ElasticSearch-Quc -Des.discovery.zen.ping.unicast.hosts=elasticsearch_master"
   links:
@@ -19,7 +19,7 @@ elasticsearch1:
   environment:
   - ES_HEAP_SIZE=512m
   
-elasticsearch2:
+elasticsearch-slave2:
   image: elasticsearch:2.4
   command: "elasticsearch -Des.cluster.name=ElasticSearch-Quc -Des.discovery.zen.ping.unicast.hosts=elasticsearch_master"
   links:
