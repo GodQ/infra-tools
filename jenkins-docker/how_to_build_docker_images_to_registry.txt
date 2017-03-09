@@ -1,0 +1,37 @@
+jenkins-master:
+    mkdir jenkins
+    docker run -d -p 8080:8080 -v $PWD/jenkins:/var/jenkins_home --name jenkins -t jenkins
+
+- install Plugin in jenkins :
+    CloudBees Docker Build and Publish plugin
+
+- start a docker registry container in one host
+          mkdir data
+          docker run -d -p 5000:5000 --restart=always --name registry -v `pwd`/data:/var/lib/registry registry:2
+
+- Set remote Access in local docker host:
+          Add 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock --insecure-registry <registry-host-ip>:5000"' in /etc/default/docker,  then service docker restart
+
+- Setting in project configuration:
+    Source Code: 
+        https://github.com/GodQ/test.git   (for test)
+    Build:
+     a. Execute Shell:
+        gcc test.c
+        mkdir ./docker/data/
+        cp a.out ./docker/data/
+        cd ./docker/data
+        echo $(date) > date.txt
+        ls -lh 
+        ./a.out
+    b. Docker Build and Publish
+          Repo Name: jenkins-docker-image-test
+          Docker Host URL:  tcp://<local-docker-host-ip>:4243
+          Docker Registry URL:   http://<registry-host-ip>:5000
+          Tag:  $BUILD_NUMBER
+          Build Context:  ./docker (the relative path of Dockerfile) 
+    c. Execute Shell:
+          curl http://<registry-host-ip>:5000/v2/_catalog
+
+   Action after Build: 
+          Stop and remove the docker Container
