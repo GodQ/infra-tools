@@ -3,7 +3,11 @@ Install in Docker Compose:
   docker-compose up -d
   docker-compose ps
 
+
 docker-compose.yml:
+You can find newest file in https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+
+For example es2.4:
 
 elasticsearch_master:
   image: elasticsearch:2.4
