@@ -3,8 +3,7 @@ MAINTAINER GodQ "https://github.com/godq"
 
 RUN apt-get update
 
-RUN apt-get install -y iputils-ping net-tools openssh-server curl wget vim 
-
+RUN apt-get install -y net-tools iputils-ping openssh-server curl  wget vim git python2.7 python-dev  python-pip
 RUN mkdir /var/run/sshd
 
 RUN echo 'root:password' |chpasswd
