@@ -1,4 +1,4 @@
-FROM   godq/ssh-server-python:python2
+FROM   godq/ssh-server-python:python3
 MAINTAINER GodQ "https://github.com/godq"
 
 ADD demo /demo
