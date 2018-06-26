@@ -9,5 +9,7 @@ RUN  ln -s /usr/bin/python3 /usr/bin/python
 RUN  ln -s /usr/bin/pip3 /usr/bin/pip
 RUN  ln -s /usr/bin/py.test-3 /usr/bin/py.test
 
+RUN pip install pytest-timeout
+
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
