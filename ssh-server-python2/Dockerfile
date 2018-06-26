@@ -5,7 +5,7 @@ RUN apt-get update
 
 RUN apt-get install -y python2.7 python-dev python-pip
 
-RUN pip install virtualenv pytest
+RUN pip install virtualenv pytest pytest-timeout
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
