@@ -3,4 +3,4 @@ MAINTAINER GodQ "https://github.com/godq"
 
 RUN mkdir -p /app/logs/
 RUN mkdir /workspace
-COPY demo /workspace/demo
+COPY demo /workspace/
