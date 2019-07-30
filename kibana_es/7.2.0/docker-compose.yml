@@ -1,0 +1,35 @@
+version: '3'
+services:
+    elasticsearch:
+      image: elasticsearch:7.2.0
+      container_name: elasticsearch
+      volumes:
+          - ./es_data:/usr/share/elasticsearch/data
+      ports:
+          - "9200:9200"
+          - "9300:9300"
+      environment:
+          discovery.type: "single-node"
+          ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+          bootstrap.memory_lock: "true"
+      ulimits:
+          memlock:
+            soft: -1
+            hard: -1
+    kibana:
+        image: kibana:7.2.0
+        container_name: kibana
+        ports:
+            - "5601:5601"
+        environment:
+            ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    logstash:
+        image: logstash:7.2.0
+        container_name: logstash
+        command: -f /etc/logstash/conf.d/
+        volumes:
+          - ./logstash/config:/etc/logstash/conf.d
+        ports:
+          - "5044:5044"
+        environment:
+          ES_JAVA_OPTS: "-Xms1g -Xmx1g"
