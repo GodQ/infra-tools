@@ -1,0 +1,1 @@
+/usr/share/filebeat/bin/filebeat -e -c filebeat.yml

@@ -1,0 +1,30 @@
+#=========================== Filebeat inputs =============================
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/test.log
+  fields:
+    content-type: json
+    content-category: test-result
+  fields_under_root: true
+
+#================================ Outputs =====================================
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  hosts: ["localhost:5044"]
+
+output.elasticsearch:
+  hosts: ["1.1.1.1:9999"]
+  enabled: false
+
+#================================ Processors =====================================
+
+# processors:
+  #- add_host_metadata: ~
+
+  #- decode_json_fields:
+  #    fields: ['message']
+  #    target: ""
+

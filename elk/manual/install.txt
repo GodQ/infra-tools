@@ -1,0 +1,24 @@
+
+
+https://www.elastic.co/guide/en/elasticsearch/reference/7.3/rpm.html#rpm-repo
+
+rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+
+Create a file called elasticsearch.repo in the /etc/yum.repos.d/
+
+[elasticsearch-7.x]
+name=Elasticsearch repository for 7.x packages
+baseurl=https://artifacts.elastic.co/packages/7.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+
+
+sudo yum install elasticsearch kibana logstash filebeat
+
+
+cp elasticsearch.yml/kibana.yml/logstash.conf/filebeat.yml to /etc/elasticsearch/....
+
