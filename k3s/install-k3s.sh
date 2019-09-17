@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+INSTALL_K3S_EXEC="--disable-agent"
 
 # Usage:
 #   curl ... | ENV_VAR=... sh -
