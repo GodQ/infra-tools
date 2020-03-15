@@ -25,7 +25,7 @@ Jinja2==2.10
 kombu==4.2.1
 Logbook==1.0.0
 MarkupSafe==1.0
-paramiko==2.2.1
+paramiko==2.2.4
 pexpect==4.6.0
 pickleshare==0.7.4
 prompt-toolkit==1.0.15
