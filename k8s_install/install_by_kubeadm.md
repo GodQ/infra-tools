@@ -48,9 +48,16 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 ```shell
 kubeadm init  --pod-network-cidr=10.244.0.0/16
 ```
+Or in order to use the private network ip 10.0.1.10, you should use:
+```shell
+kubeadm init --apiserver-advertise-address=10.0.1.10 --apiserver-cert-extra-sans=10.0.1.10,10.110.125.10 --pod-network-cidr=10.244.0.0/16
+```
+
 Get the join command and token like 
   "kubeadm join <master-ip> --token <token> --discovery-token-ca-cert-hash <hash>"
 copy config file to .kube folder to enable kubectl
+Note: the kubeadm join command must keep in record.
+
 ```shell
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
