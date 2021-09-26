@@ -1,0 +1,3 @@
+curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--docker" K3S_URL=https://<master>:6443 K3S_TOKEN=<token> sh -
+
+#curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_EXEC="--docker" K3S_URL=https://10.0.1.10:6443 K3S_TOKEN=K106bf306a9643c7fd9b2011995294856a76cc51b95c2fd13fa7a6ac20316d2a303::server:ae720a4cc45ca7caa653b629954d7f41 sh -
