@@ -21,7 +21,7 @@ idna==2.5
 ipython==7.16.3
 ipython-genutils==0.2.0
 itsdangerous==0.24
-Jinja2==2.10.1
+Jinja2==2.11.3
 kombu==4.2.1
 Logbook==1.0.0
 MarkupSafe==1.0
