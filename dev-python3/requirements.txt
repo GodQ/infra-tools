@@ -14,7 +14,7 @@ decorator==4.3.0
 Faker==0.7.18
 fire==0.1.1
 Flask==1.0
-Flask-Cors==3.0.2
+Flask-Cors==3.0.9
 Flask-SocketIO==2.9.0
 gunicorn==19.7.0
 idna==2.5
