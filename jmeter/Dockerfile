@@ -1,4 +1,4 @@
-FROM golang as builder
+FROM golang:1.20.5 as builder
 COPY . /agent
 WORKDIR /agent
 RUN git clone https://github.com/GodQ/go-rest-agent.git \
