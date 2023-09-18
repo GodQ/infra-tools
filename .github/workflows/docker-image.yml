@@ -15,7 +15,7 @@ jobs:
     - name: Build the Docker image
       run: cd jmeter && \
            docker build . --file Dockerfile -t godq/jmeter && \
-           docker login -u godq -p dckr_pat_COfZBm8_9jLHtqV7debo4xn3YTw
+           docker login -u godq -p dckr_pat_COfZBm8_9jLHtqV7debo4xn3YTw && \
            docker push godq/jmeter
            
     # - name: Build and push Jmeter Docker images
