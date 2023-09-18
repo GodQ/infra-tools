@@ -3,7 +3,7 @@ COPY . /agent
 WORKDIR /agent
 RUN git clone https://github.com/GodQ/go-rest-agent.git \
     && cd go-rest-agent \
-    && go build main.go -o /agent/agent \
+    && go build -o /agent/agent \
     && ls /agent
 
 
