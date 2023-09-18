@@ -1,3 +1,12 @@
+FROM golang as builder
+COPY . /agent
+WORKDIR /agent
+RUN git clone https://github.com/GodQ/go-rest-agent.git \
+    && cd go-rest-agent \
+    && go build -o agent
+
+
+
 FROM openjdk:22-jdk-slim
 
 # https://jmeter.apache.org/usermanual/remote-test.html
@@ -21,10 +30,10 @@ RUN curl -kv https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-${JMETER_VE
     && mv /tmp/apache-jmeter-${JMETER_VERSION} /jmeter \
     && rm -f apache-jmeter-${JMETER_VERSION}.tgz
 
-RUN wget https://github.com/GodQ/go-rest-agent/releases/download/1.0.1/go-rest-agent.tgz -O agent.tgz \
-    && mkdir /tmp/agent/ && tar zxvf agent.tgz -C /tmp/agent \
-    && cp /tmp/agent/dist/linux-amd64/agent /jmeter \
-    && chmod +x agent
+# RUN wget https://github.com/GodQ/go-rest-agent/releases/download/1.0.1/go-rest-agent.tgz -O agent.tgz \
+#     && mkdir /tmp/agent/ && tar zxvf agent.tgz -C /tmp/agent \
+#     && cp /tmp/agent/dist/linux-amd64/agent /jmeter \
+#     && chmod +x agent
 
 EXPOSE 1099
 EXPOSE ${AGENT_PORT}
@@ -32,6 +41,7 @@ EXPOSE ${AGENT_PORT}
 WORKDIR /jmeter
 
 COPY start.sh .
+COPY --from=builder /agent/agent /jmeter/
 
 # Default command
 CMD ["bash", "start.sh"]
