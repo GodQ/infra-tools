@@ -14,7 +14,7 @@ do
         -e SOURCE_GIT_URL=$git_url \
         -e PROJECT_DIR=jmeter \
         -e LIB_EXT_DIR=lib \
-        jmeter-worker
+        godq/jmeter
 done
 docker ps | grep jmeter-worker-
 
@@ -26,7 +26,7 @@ docker run -it --rm \
     -e SOURCE_GIT_URL=$git_url \
     -e PROJECT_DIR=jmeter \
     -e LIB_EXT_DIR=lib \
-    jmeter-worker \
+    godq/jmeter \
     bash
 
 # docker run -it -d --rm \
@@ -36,4 +36,4 @@ docker run -it --rm \
 #     -e SOURCE_GIT_URL=$git_url \
 #     -e PROJECT_DIR=jmeter \
 #     -e LIB_EXT_DIR=lib \
-#     jmeter-worker
+#     godq/jmeter

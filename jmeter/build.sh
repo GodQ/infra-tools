@@ -1,1 +1,1 @@
-docker build --force-rm=true -t jmeter-worker .
+docker build --force-rm=true -t godq/jmeter .
