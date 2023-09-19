@@ -12,8 +12,8 @@ if [ -z "$?" ]; then
     exit 1
 fi
 
-jmeter_dir=$git_dir/jmeter
-lib_dir=$git_dir/lib
+jmeter_dir=$git_dir/$PROJECT_DIR
+lib_dir=$git_dir/$LIB_EXT_DIR
 
 if [ ! "$(ls -A $jmeter_dir)" ]; then
         echo "The jmeter dir should not be empty"
@@ -23,7 +23,7 @@ cp -rf $jmeter_dir project
 
 if [ -d "$lib_dir" ]; then
     if [ "$(ls -A $lib_dir)" ]; then
-        echo "copy git lib to jmeter"
+        echo "copy customized lib ext jar files to jmeter lib ext dir"
         cp -rf $lib_dir/* lib/ext
     fi
 fi

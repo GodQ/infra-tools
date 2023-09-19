@@ -13,8 +13,15 @@ FROM openjdk:22-jdk-slim
 # https://jmeter.apache.org/usermanual/remote-test.html
 
 ENV JMETER_VERSION 5.6.2
-ENV SOURCE_GIT_URL ""
+# need to overwrite
+ENV SOURCE_GIT_URL "https://gitlab.com/godq/jmeter_test.git" 
+# default jmx dir <git project>/jmeter, need to overwrite
+ENV PROJECT_DIR "jmeter"
+# default lib ext dir <git project>/lib, need to overwrite
+ENV LIB_EXT_DIR "lib"
+# worker for worker node, master for master node
 ENV ROLE=worker
+# go-rest-agent port, need to overwrite
 ENV AGENT_PORT 80
 
 ENV LANG en_US.UTF-8
