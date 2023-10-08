@@ -11,6 +11,7 @@ for((i=0;i<$worker_count;i++))
 do
     docker run -it -d --rm \
         --name jmeter-worker-$i \
+        -e ROLE=worker \
         -e SOURCE_GIT_URL=$git_url \
         -e PROJECT_DIR=jmeter \
         -e LIB_EXT_DIR=lib \
