@@ -1,8 +1,8 @@
 FROM       ubuntu:20.04
 MAINTAINER GodQ "https://github.com/godq"
 
-ENV http_proxy http://proxy.vmware.com:3128
-ENV https_proxy https://proxy.vmware.com:3128
+ENV http_proxy ""
+ENV https_proxy ""
 
 RUN apt-get update
 

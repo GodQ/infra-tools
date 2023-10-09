@@ -1,0 +1,6 @@
+FROM alpine:3.16
+
+ENV http_proxy ""
+ENV https_proxy ""
+
+RUN apk add --no-cache openssh && ssh-keygen -A && echo 'root:root' | chpasswd
