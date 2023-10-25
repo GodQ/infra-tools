@@ -47,6 +47,6 @@ traitlets==4.3.2
 urllib3==1.26.17
 vine==1.1.4
 wcwidth==0.1.7
-Werkzeug==2.2.3
+Werkzeug==3.0.1
 kubernetes==6.0.0
 pytest==3.6.2
